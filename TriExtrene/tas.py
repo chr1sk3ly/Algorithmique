@@ -1,5 +1,5 @@
 class Tas :
-    def __init__(self, tas : list[int]) :
+    def __init__(self, tas) :
         self.length = 0
         self.tas = self._creerTas(tas)
 
@@ -44,9 +44,33 @@ class Tas :
                     indice_pere = (indice - 2) // 2
 
             return tas
+        
+    def ajout_au_tas(self, elem) :
+        self.tas = self.ajouter(self.tas, elem)
+
+    def cueillir_racine(self) :
+        racine = self.tas.pop(0)
+        self.length -= 1
+        p = self.length
+        # Faire remonter les fils
+        i = 0
+        fini = False
+        while (i < (p-1)//2 and not fini) :
+            if (p == 2*i + 1 or self.tas[2*i+1] < self.tas[2*i + 2]) :
+                j = 2*i + 1
+            else :
+                j = 2*i + 2
+
+            if self.tas[i] > self.tas[j] :
+                self.tas[i], self.tas[j] = self.tas[j], self.tas[i]
+                i = j
+            else :
+                fini = True
+
+        return racine
 
     def print(self):
-        def _print_arbre(t, i=0, s="") :
+        def _print_arbre(t, i=0, s="",n=self.length) :
             if (i < len(t) and t[i] is not None) :
                 _print_arbre(t, 2*i + 2,s+"\t")
                 print(f"{s}{t[i]}")
@@ -58,5 +82,7 @@ class Tas :
 if __name__ == '__main__' :
 
     tas = Tas([5,8,6,4,2,9,3,10,22,32,15])
+
+    tas.ajout_au_tas(1)
 
     tas.print()
