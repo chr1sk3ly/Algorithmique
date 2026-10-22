@@ -49,13 +49,13 @@ class Tas :
         self.tas = self.ajouter(self.tas, elem)
 
     def cueillir_racine(self) :
-        racine = self.tas.pop(0)
-        self.length -= 1
-        p = self.length
+        racine = self.tas[0]
+        p = self.length - 1
+        self.tas[0] = self.tas[p]
         # Faire remonter les fils
         i = 0
         fini = False
-        while (i < (p-1)//2 and not fini) :
+        while (i < p//2 and not fini) :
             if (p == 2*i + 1 or self.tas[2*i+1] < self.tas[2*i + 2]) :
                 j = 2*i + 1
             else :
@@ -66,7 +66,8 @@ class Tas :
                 i = j
             else :
                 fini = True
-
+        self.tas.pop(-1)
+        self.length -= 1
         return racine
 
     def print(self):
