@@ -20,7 +20,7 @@ def indice_mirroir (indice) :
 
     borne_inf_droite = milieu + 1
 
-    if indice <  milieu :
+    if indice <=  milieu :
         return borne_inf_droite + (indice - borne_inf_gauche)
     
     else :
@@ -47,13 +47,10 @@ def ajouterElement(tab, elem) :
     if len(tab) <= 1 : 
         n = len(tab)
         tab += [elem]
-        remonter_gauche(tab,n-1)
         return
     
     n = len(tab)
     tab += [elem]
-
-    k = ceil(log2(n+2))
 
     # Le cas où l'élément ajouté est dans le sous-arbre gauche de la racine
     if (n <= indice_milieu(n)) :
@@ -76,8 +73,8 @@ def ajouterElement(tab, elem) :
             tab[n], tab[m] = tab[m], tab[n]
 
         # Remonter les éléments modifiés
-        remonter_gauche(tab,n)
-        remonter_droite(tab,m)
+        remonter_gauche(tab,m)
+        remonter_droite(tab,n)
 
 def print_arbre(tas):
     def _print_arbre(t, i=0, s="",n=len(tas)) :
