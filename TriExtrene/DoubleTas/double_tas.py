@@ -45,7 +45,6 @@ def remonter_droite(tab, indice) :
 def ajouterElement(tab, elem) :
     
     if len(tab) <= 1 : 
-        n = len(tab)
         tab += [elem]
         return
     
@@ -84,6 +83,7 @@ def print_arbre(tas):
             _print_arbre(t, 2*i + 1,s+"\t")
             
     _print_arbre(tas)
+    print("######################################################")
 
 tas = [None]
 
